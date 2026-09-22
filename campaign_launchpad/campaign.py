@@ -74,6 +74,8 @@ class CampaignBuilder:
         raise ValueError("Campaign channel cannot be empty.")
       if not self._daily_budget or self._daily_budget <= 0:
         raise ValueError("Daily budget must exist and be a positive number.")
+      if not self._start_date:
+        raise ValueError("Start date must be provided.")
       if self._end_date is not None and self._end_date < self._start_date:
         raise ValueError("Start date must be before or equal to end date.")
       if not self._creatives:
