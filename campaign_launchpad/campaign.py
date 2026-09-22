@@ -33,7 +33,7 @@ class CampaignBuilder:
 
     def with_name(self, name: str): #setters
       # TODO
-      self.name = name
+      self._name = name
       return self
 
 
@@ -44,17 +44,12 @@ class CampaignBuilder:
 
     def with_budget(self, daily_budget: float):
       # TODO
-      if daily_budget <= 0:
-        raise ValueError("Daily budget cannot be negative.")
-      else:
-        self._daily_budget = daily_budget
+      self._daily_budget = daily_budget   
       return self
 
     def with_dates(self, start_date, end_date=None):
       # TODO
-      if end_date is not None and end_date < start_date:
-            raise ValueError("End date cannot be earlier than start date.")
-      self._start_date = start_date
+      self._start_date = start_date       
       self._end_date = end_date
       return self
 
@@ -79,8 +74,8 @@ class CampaignBuilder:
         raise ValueError("Campaign channel cannot be empty.")
       if not self._daily_budget or self._daily_budget <= 0:
         raise ValueError("Daily budget must exist and be a positive number.")
-      if not self._start_date:
-        raise ValueError("Start date must be provided.")
+      if self._end_date is not None and self._end_date < self._start_date:
+        raise ValueError("Start date must be before or equal to end date.")
       if not self._creatives:
         raise ValueError("At least one creative must be provided.")
       
